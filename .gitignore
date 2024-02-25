@@ -7,3 +7,7 @@ Thumbs.db
 *.sublime-workspace
 *.log
 yarn.lock
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

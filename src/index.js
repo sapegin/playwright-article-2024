@@ -1,16 +1,21 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Routes } from './routes';
+import { createRoot } from 'react-dom/client';
+import { App } from './app';
 
 // Start mocks worker only in development mode
-if (process.env.NODE_ENV === 'development') {
-  const { worker } = require('./mocks/browser');
-  worker.start();
+async function enableMocking() {
+  if (process.env.NODE_ENV !== 'development') {
+    return;
+  }
+
+  const { worker } = await import('./mocks/browser');
+
+  // `worker.start()` returns a Promise that resolves
+  // once the Service Worker is up and ready to intercept requests.
+  return worker.start();
 }
 
-function App() {
-  return <Routes />;
-}
-
-const rootElement = document.getElementById('root');
-ReactDOM.render(<App />, rootElement);
+enableMocking().then(() => {
+  const root = createRoot(document.getElementById('root'));
+  root.render(<App />);
+});

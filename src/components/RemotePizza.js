@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { fetchIngredients as defaultFetchIngredients } from '../services';
 
 export function RemotePizza({ fetchIngredients }) {
@@ -34,6 +35,10 @@ export function RemotePizza({ fetchIngredients }) {
     </>
   );
 }
+
+RemotePizza.propTypes = {
+  fetchIngredients: PropTypes.func,
+};
 
 RemotePizza.defaultProps = {
   fetchIngredients: defaultFetchIngredients,

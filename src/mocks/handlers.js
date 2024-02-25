@@ -1,16 +1,13 @@
-import { rest } from 'msw';
+import { http, HttpResponse } from 'msw';
 
 export const handlers = [
   // GET requests to https://httpbin.org/anything with any parameters
-  rest.get('https://httpbin.org/anything', (req, res, ctx) => {
+  http.get('https://httpbin.org/anything', () => {
     // Return OK status with a JSON object
-    return res(
-      ctx.status(200),
-      ctx.json({
-        args: {
-          ingredients: ['bacon', 'tomato', 'mozzarella', 'pineapples'],
-        },
-      })
-    );
+    return HttpResponse.json({
+      args: {
+        ingredients: ['bacon', 'tomato', 'mozzarella', 'pineapples'],
+      },
+    });
   }),
 ];

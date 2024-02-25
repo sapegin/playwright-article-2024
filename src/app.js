@@ -1,21 +1,25 @@
 import React from 'react';
-import { Router, Link } from '@reach/router';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { SignUp } from './components/SignUp';
 import { Profile } from './components/Profile';
 import { RemotePizza } from './components/RemotePizza';
 
 const HomePage = () => (
-  <ul>
-    <li>
-      <Link to="/signup">Sign up</Link>
-    </li>
-    <li>
-      <Link to="/profile">Profile</Link>
-    </li>
-    <li>
-      <Link to="/remote-pizza">RemotePizza</Link>
-    </li>
-  </ul>
+  <main>
+    <h1>Little pizza app</h1>
+    <p>Welcome back, space cowboy!</p>
+    <ul>
+      <li>
+        <Link to="/signup">Sign up</Link>
+      </li>
+      <li>
+        <Link to="/profile">Profile</Link>
+      </li>
+      <li>
+        <Link to="/remote-pizza">RemotePizza</Link>
+      </li>
+    </ul>
+  </main>
 );
 
 const SignUpPage = () => <SignUp />;
@@ -41,14 +45,16 @@ const TermsAndConfitionsPage = () => (
   </main>
 );
 
-export function Routes() {
+export function App() {
   return (
-    <Router>
-      <HomePage path="/" />
-      <SignUpPage path="/signup" />
-      <ProfilePage path="/profile" />
-      <RemotePizzaPage path="/remote-pizza" />
-      <TermsAndConfitionsPage path="/toc" />
-    </Router>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/remote-pizza" element={<RemotePizzaPage />} />
+        <Route path="/toc" element={<TermsAndConfitionsPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
